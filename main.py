@@ -11,11 +11,9 @@ def mostrar_menu():
     )
     return menu
 
-def opcion_crear(dao):
-    nombre = input("Nombre de la carrera: ")
-    duracion = int(input("Duración en años: "))
+def opcion_crear(dao, nombre, duracion):
     c = Carrera(nombre, duracion)
-    dao.create(c)     
+    dao.create(c)
 
 def opcion_ver(dao, id_ = -1):
     pass
