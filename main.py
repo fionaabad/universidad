@@ -16,19 +16,20 @@ def opcion_crear(dao):
 
 def opcion_ver(dao, id_ = -1):
     pass
-    
-def opcion_actualizar(dao):
-    id_ = int(input("ID a actualizar: "))
-    nombre = input("Nuevo nombre: ").strip()
-    duracion = int(input("Nueva duración (años): "))
+
+def opcion_actualizar(dao, id_, nombre, duracion):
     ok = dao.update(Carrera(nombre, duracion, id_))
     if ok:
-        print("Carrera actualizada.")
+        return("Carrera actualizada.")
     else:
-        print("No se encontró la carrera.")
+        return("No se encontró la carrera.")
         
-def opcion_borrar(dao):
-    pass
+def opcion_borrar(dao, nombre):
+    ok = dao.delete(Carrera(nombre))
+    if ok:
+        return("Carrera eliminada.")
+    else:
+        return("No se encontró la carrera.")
 
     
 
