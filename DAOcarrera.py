@@ -6,14 +6,16 @@ class CarreraDAO:
         self.__conn = conn
         
     def create(self, c):
-        pass
-    
+        
     def read(self, id_):
         pass
     
     def update(self, c):
-        pass
-    
+        sql = "UPDATE carrera SET nombre =%s, duracion = %s, WHERE id = %s"
+        valores = (c.GetNombre(), c.GetDuracion(), c.GetId())
+        self.cursor.execute(sql, valores)
+        self.conn.commit()
+        
     def delete(self, id_):
         pass
     
