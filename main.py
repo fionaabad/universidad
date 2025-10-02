@@ -37,4 +37,30 @@ def opcion_borrar(dao, nombre):
         return False
 
     
+dao = CarreraDAO()   
 
+while True:
+    print(mostrar_menu())
+    opcion = input("Elige opción: ").strip()
+    
+    if opcion == "1":
+        pass
+    
+    elif opcion == "2":
+        pass
+    
+    elif opcion == "3":
+        pass
+    
+    elif opcion == "4":
+        pass
+    
+    elif opcion == '0':
+        pass
+    
+    else:
+        print("Opción no válida")
+
+
+    
+    
