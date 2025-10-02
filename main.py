@@ -11,8 +11,9 @@ def mostrar_menu():
     )
     return menu
 
-def opcion_crear(dao):
-    pass
+def opcion_crear(dao, nombre, duracion):
+    c = Carrera(nombre, duracion)
+    dao.create(c)
 
 def opcion_ver(dao, id_ = -1):
     pass
