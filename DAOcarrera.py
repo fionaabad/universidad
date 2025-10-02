@@ -53,8 +53,3 @@ class CarreraDAO:
         sql = "DELETE FROM carreras WHERE id = %s"
         self.GetCursor().execute(sql, (id_,))
         self.GetConn().commit()
-    
-    def fetchall(self):
-        pass
-
-
