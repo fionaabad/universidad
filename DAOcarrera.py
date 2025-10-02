@@ -17,8 +17,10 @@ class CarreraDAO:
         self.conn.commit()
         
     def delete(self, id_):
-        pass
-    
+        sql = "DELETE FROM carrera WHERE id_ = %s"
+        self.cursor.execute(sql, (id_,))
+        self.conn.commit()
+               
     def select(self):
         pass
 
