@@ -12,30 +12,16 @@ def mostrar_menu():
     return menu
 
 def opcion_crear(dao, nombre, duracion):
-    c = Carrera(nombre, duracion)
-    ok = dao.create(c)
-    if ok:
-        return True
-    else:
-        return False
+    return dao.create(nombre, duracion)
 
 def opcion_ver(dao, nombre = ""):
     return dao.read(nombre)
 
 def opcion_actualizar(dao, id_, nombre, duracion):
-    ok = dao.update(Carrera(nombre, duracion, id_))
-    if ok:
-        return True
-    else:
-        return False
-        
+    return dao.update(nombre, duracion, id_)
+       
 def opcion_borrar(dao, nombre):
-    ok = dao.delete(Carrera(nombre))
-    if ok:
-        return True
-    else:
-        return False
-
+    return dao.delete(nombre)
     
 dao = CarreraDAO()   
 
