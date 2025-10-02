@@ -19,8 +19,8 @@ def opcion_crear(dao, nombre, duracion):
     else:
         return False
 
-def opcion_ver(dao, id_ = -1):
-    pass
+def opcion_ver(dao, nombre = ""):
+    return dao.read(nombre)
 
 def opcion_actualizar(dao, id_, nombre, duracion):
     ok = dao.update(Carrera(nombre, duracion, id_))
