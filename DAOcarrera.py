@@ -35,7 +35,7 @@ class CarreraDAO:
     def update(self, c):
         sql = "UPDATE carrera SET nombre = %s, duracion = %s WHERE id = %s"
         valores = (c.GetNombre(), c.GetDuracion(), c.GetId())
-        self.GetCursor().execute(sql, valores)
+        self.GetCursor().execute(sql, valores,)
         self.GetConn.commit()
         
     def delete(self, id_):
