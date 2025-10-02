@@ -28,7 +28,13 @@ class CarreraDAO:
         self.GetCursor().execute(sql, (c.nombre, c.duracion, c.id_))
         self.GetConn().commit()
         self.GetCursor().close()
-    
+
+    def update(self, c):
+        sql = "UPDATE carrera SET nombre = %s, duracion = %s WHERE id = %s"
+        valores = (c.GetNombre(), c.GetDuracion(), c.GetId())
+        self.GetCursor().execute(sql, valores,)
+        self.GetConn.commit()
+        
     def read(self, nombre = ""):
         query = ""
 
@@ -42,12 +48,6 @@ class CarreraDAO:
             self.GetCursor().execute(query, values)
             
         return self.GetCursor().fetchall()
-    
-    def update(self, c):
-        sql = "UPDATE carrera SET nombre = %s, duracion = %s WHERE id = %s"
-        valores = (c.GetNombre(), c.GetDuracion(), c.GetId())
-        self.GetCursor().execute(sql, valores,)
-        self.GetConn.commit()
         
     def delete(self, nombre):
         sql = "DELETE FROM carreras WHERE nombre = %s"

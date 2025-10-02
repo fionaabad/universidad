@@ -14,16 +14,17 @@ def mostrar_menu():
 def opcion_crear(dao, nombre, duracion):
     return dao.create(nombre, duracion)
 
-def opcion_ver(dao, nombre = ""):
-    return dao.read(nombre)
-
 def opcion_actualizar(dao, id_, nombre, duracion):
     return dao.update(nombre, duracion, id_)
+
+def opcion_ver(dao, nombre = ""):
+    return dao.read(nombre)
        
 def opcion_borrar(dao, nombre):
     return dao.delete(nombre)
     
 dao = CarreraDAO()   
+
 
 while True:
     print(mostrar_menu())
