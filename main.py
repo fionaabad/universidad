@@ -15,9 +15,9 @@ def opcion_crear(dao, nombre, duracion):
     c = Carrera(nombre, duracion)
     ok = dao.create(c)
     if ok:
-        return False
-    else:
         return True
+    else:
+        return False
 
 def opcion_ver(dao, id_ = -1):
     pass
@@ -25,16 +25,16 @@ def opcion_ver(dao, id_ = -1):
 def opcion_actualizar(dao, id_, nombre, duracion):
     ok = dao.update(Carrera(nombre, duracion, id_))
     if ok:
-        return False
-    else:
         return True
+    else:
+        return False
         
 def opcion_borrar(dao, nombre):
     ok = dao.delete(Carrera(nombre))
     if ok:
-        return False
-    else:
         return True
+    else:
+        return False
 
     
 
