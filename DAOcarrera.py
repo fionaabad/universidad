@@ -3,19 +3,31 @@ from carrera import Carrera
 
 class CarreraDAO:
     def __init__(self):
-        self.__conn = mysql.connector.connect(
+        self.SetConn(mysql.connector.connect(
             host="localhost",
             user="root",
             password="root",
-            database="universidad"
-        )
+            database="universidad") )
+        self.SetCursor(self.__conn.cursor()) 
+
+    def GetConn(self):
+        return self.__conn
+    
+    def SetConn(self, conn):
+        self.__conn = conn
         
+    def GetCursor(self):
+        return self.__cursor
+    
+    def SetCursor(self, cursor):
+        cursor
+        self.__cursor = cursor 
+
     def create(self, c):
-        cur = self.__conn.cursor()
         sql = "INSERT INTO carreras (nombre, duracion, id) VALUES (%s, %s, %s)"
-        cur.execute(sql, (c.nombre, c.duracion, c.id_))
-        self.__conn.commit()
-        cur.close()
+        self.GetCursor().execute(sql, (c.nombre, c.duracion, c.id_))
+        self.GetConn().commit()
+        self.GetCursor().close()
     
     def read(self, id_):
         pass
