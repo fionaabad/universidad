@@ -34,14 +34,14 @@ class CarreraDAO:
 
         if nombre == "":
             query = "SELECT * FROM carrera"
-            GetCursor().execute(query)
+            self.GetCursor().execute(query)
 
         else:
             query = "SELECT * FROM carrera WHERE nombre LIKE %s"
             values = [nombre]
-            GetCursor().execute(query, values)
+            self.GetCursor().execute(query, values)
             
-        return GetCursor().fetchall()
+        return self.GetCursor().fetchall()
     
     def update(self, c):
         sql = "UPDATE carrera SET nombre = %s, duracion = %s WHERE id = %s"
