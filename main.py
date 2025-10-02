@@ -14,12 +14,19 @@ def mostrar_menu():
 def opcion_crear(dao):
     pass
 
-def opcion_ver(dao, id = -1):
+def opcion_ver(dao, id_ = -1):
     pass
-
+    
 def opcion_actualizar(dao):
-    pass
-
+    id_ = int(input("ID a actualizar: "))
+    nombre = input("Nuevo nombre: ").strip()
+    duracion = int(input("Nueva duración (años): "))
+    ok = dao.update(Carrera(nombre, duracion, id_))
+    if ok:
+        print("Carrera actualizada.")
+    else:
+        print("No se encontró la carrera.")
+        
 def opcion_borrar(dao):
     pass
 
