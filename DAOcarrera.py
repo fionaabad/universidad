@@ -29,8 +29,19 @@ class CarreraDAO:
         self.GetConn().commit()
         self.GetCursor().close()
     
-    def read(self, id_):
-        pass
+    def read(self, nombre = ""):
+        query = ""
+
+        if nombre == "":
+            query = "SELECT * FROM carrera"
+            self.GetCursor().execute(query)
+
+        else:
+            query = "SELECT * FROM carrera WHERE nombre LIKE %s"
+            values = [nombre]
+            self.GetCursor().execute(query, values)
+            
+        return self.GetCursor().fetchall()
     
     def update(self, c):
         sql = "UPDATE carrera SET nombre = %s, duracion = %s WHERE id = %s"
