@@ -1,5 +1,3 @@
-import mysql.connector
-from carrera import Carrera
 from DAOcarrera import CarreraDAO
 
 def mostrar_menu():

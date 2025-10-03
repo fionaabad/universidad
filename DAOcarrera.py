@@ -1,5 +1,4 @@
 import mysql.connector
-from decimal import Decimal
 from carrera import Carrera
 
 class CarreraDAO:
