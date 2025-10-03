@@ -2,11 +2,11 @@ import mysql.connector
 from carrera import Carrera
 
 class CarreraDAO:
-    def __init__(self):
+    def __init__(self, password = "root"):
         self.SetConn(mysql.connector.connect(
             host="localhost",
             user="root",
-            password="root",
+            password=password,
             database="universidad") )
         self.SetCursor(self.__conn.cursor()) 
 
