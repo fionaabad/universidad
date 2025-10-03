@@ -23,8 +23,9 @@ def opcion_ver(dao, nombre = ""):
 def opcion_borrar(dao, nombre):
     return dao.delete(nombre)
 
+user = input("(Predeterminado: root) Escribe el usuario: ")
 password = input("(Predeterminado: root) Escribe la contraseña: ")
-dao = CarreraDAO(password)   
+dao = CarreraDAO(user, password)   
 
 
 continuar = True

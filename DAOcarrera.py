@@ -3,10 +3,10 @@ from decimal import Decimal
 from carrera import Carrera
 
 class CarreraDAO:
-    def __init__(self, password = "root"):
+    def __init__(self, user = "root", password = "root"):
         self.SetConn(mysql.connector.connect(
             host="localhost",
-            user="root",
+            user=user,
             password=password,
             database="universidad") )
         self.SetCursor(self.__conn.cursor()) 
