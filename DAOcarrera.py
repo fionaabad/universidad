@@ -52,7 +52,7 @@ class CarreraDAO:
         for registro in registros:
             id_carrera = registro[0]
             nombre_carrera = registro[1]
-            duracion_carrera = round(float(registro[2]), 2)
+            duracion_carrera = round(float(registro[2]), 1)
 
             carrera = Carrera(nombre_carrera, duracion_carrera, id_carrera)
             carreras.append(carrera)
