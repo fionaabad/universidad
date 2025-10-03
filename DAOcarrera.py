@@ -1,4 +1,5 @@
 import mysql.connector
+from decimal import Decimal
 from carrera import Carrera
 
 class CarreraDAO:
@@ -43,11 +44,20 @@ class CarreraDAO:
             self.GetCursor().execute(query)
 
         else:
+            fnombre = f"%{nombre}%"
             query = "SELECT * FROM carrera WHERE nombre LIKE %s"
-            values = [nombre]
-            self.GetCursor().execute(query, values)
+            self.GetCursor().execute(query, (fnombre,))
             
-        return self.GetCursor().fetchall()
+        registros = self.GetCursor().fetchall()
+        carreras = []
+        for registro in registros:
+            id_carrera = registro[0]
+            nombre_carrera = registro[1]
+            duracion_carrera = round(float(registro[2]), 2)
+
+            carrera = Carrera(nombre_carrera, duracion_carrera, id_carrera)
+            carreras.append(carrera)
+        return carreras
         
     def delete(self, nombre):
         sql = "DELETE FROM carreras WHERE nombre = %s"
