@@ -24,9 +24,14 @@ def opcion_borrar(dao, nombre):
     return dao.delete(nombre)
 
 user = input("(Predeterminado: root) Escribe el usuario: ")
-password = input("(Predeterminado: root) Escribe la contraseña: ")
-dao = CarreraDAO(user, password)   
+if user == "":
+    user = "root"
 
+password = input("(Predeterminado: root) Escribe la contraseña: ")
+if password == "":
+    password = "root"
+
+dao = CarreraDAO(user, password)
 
 continuar = True
 
@@ -50,7 +55,6 @@ while continuar:
         else:
             print("Sin resultados")
 
-    
     elif opcion == "4":
         pass
     
