@@ -30,7 +30,7 @@ class CarreraDAO:
         self.GetCursor().close()
 
     def update(self, c):
-        sql = "UPDATE carrera SET nombre = %s, duracion = %s WHERE id = %s"
+        sql = "UPDATE carreras SET nombre = %s, duracion = %s WHERE id = %s"
         valores = (c.GetNombre(), c.GetDuracion(), c.GetId())
         self.GetCursor().execute(sql, valores,)
         self.GetConn.commit()
@@ -39,12 +39,12 @@ class CarreraDAO:
         query = ""
 
         if nombre == "":
-            query = "SELECT * FROM carrera"
+            query = "SELECT * FROM carreras"
             self.GetCursor().execute(query)
 
         else:
             fnombre = f"%{nombre}%"
-            query = "SELECT * FROM carrera WHERE nombre LIKE %s"
+            query = "SELECT * FROM carreras WHERE nombre LIKE %s"
             self.GetCursor().execute(query, (fnombre,))
             
         registros = self.GetCursor().fetchall()
