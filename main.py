@@ -39,7 +39,15 @@ while continuar:
         pass
     
     elif opcion == "3":
-        pass
+        nombre = input("(opcional) Nombre a buscar: ")
+        carreras = opcion_ver(dao, nombre)
+
+        if len(carreras) > 0:
+            for carrera in carreras:
+                print(carrera)
+        else:
+            print("Sin resultados")
+
     
     elif opcion == "4":
         pass
