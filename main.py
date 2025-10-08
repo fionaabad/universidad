@@ -30,7 +30,11 @@ while True:
     opcion = input("Elige opción: ").strip()
     
     if opcion == "1":
-        pass
+        nombre = input("Introduce el nombre de la carrera")
+        duracion = float(input("Introduce la duracion de la carrera en años"))
+
+        c = Carrera(nombre, duracion)
+        dao.create(c)
     
     elif opcion == "2":
         pass
