@@ -40,7 +40,6 @@ while continuar:
     opcion = input("Elige opción: ").strip()
     
     if opcion == "1":
-        # Añadir
         nombre = input("Nombre de la carrera: ").strip()
         if nombre == "":
             print("El nombre no puede estar vacío.")
@@ -75,8 +74,7 @@ while continuar:
         else:
             print("Sin resultados")
 
-    elif opcion == "4":
-        
+    elif opcion == "4": 
         nombre = input("Nombre de la carrera a borrar: ").strip()
         if nombre == "":
             print("El nombre no puede estar vacío.")
