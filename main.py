@@ -50,9 +50,11 @@ while continuar:
         except ValueError:
             print("Duración no válida. Debe ser un número.")
             continue
+        
+        carrera = Carrera(nombre, duracion)
 
         try:
-            opcion_crear(dao, nombre, duracion)
+            dao.create(carrera)
             print("Carrera añadida correctamente.")
         except Exception as e:
             print(f"Error al añadir: {e}")
@@ -76,21 +78,21 @@ while continuar:
         carrera_actual = carreras[0]
         print(f"Carrera encontrada: {carrera_actual}")
 
-        nuevo_nombre = input("Nuevo nombre (dejar vacío para mantener el actual): ").strip()
+        nuevo_nombre = input("Nuevo nombre (dejar vacio para mantener el actual): ").strip()
         if nuevo_nombre == "":
             nuevo_nombre = carrera_actual.GetNombre()
 
-        dur = input("Nueva duración (dejar vacío para mantener la actual): ").strip()
+        dur = input("Nueva duración (dejar vacio para mantener la actual): ").strip()
         if dur == "":
             nueva_duracion = carrera_actual.GetDuracion()
         else:
             try:
                 nueva_duracion = float(dur)
             except ValueError:
-                print("Duración no válida. Debe ser un número.")
+                print("Duración no valida, debe ser un número.")
                 continue
 
-        # Crear la carrera actualizada (mantiene el id)
+       
         carrera_modificada = Carrera(nuevo_nombre, nueva_duracion, carrera_actual.GetId())
 
         try:

@@ -24,8 +24,8 @@ class CarreraDAO:
         self.__cursor = cursor 
 
     def create(self, c):
-        sql = "INSERT INTO carreras (nombre, duracion, id) VALUES (%s, %s, %s)"
-        self.GetCursor().execute(sql, (c.nombre, c.duracion, c.id_))
+        sql = "INSERT INTO carreras (nombre, duracion) VALUES (%s, %s)"
+        self.GetCursor().execute(sql, (c.GetNombre(), c.GetDuracion()))
         self.GetConn().commit()
         self.GetCursor().close()
 
