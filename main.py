@@ -40,14 +40,34 @@ while continuar:
     opcion = input("Elige opción: ").strip()
     
     if opcion == "1":
-        pass
+        # Añadir
+        nombre = input("Nombre de la carrera: ").strip()
+        if nombre == "":
+            print("El nombre no puede estar vacío.")
+            continue
+        dur = input("Duración (años, puede ser decimal): ").strip()
+        try:
+            duracion = float(dur)
+        except ValueError:
+            print("Duración no válida. Debe ser un número.")
+            continue
+
+        try:
+            opcion_crear(dao, nombre, duracion)
+            print("Carrera añadida correctamente.")
+        except Exception as e:
+            print(f"Error al añadir: {e}")
     
     elif opcion == "2":
         pass
     
     elif opcion == "3":
         nombre = input("(opcional) Nombre a buscar: ")
-        carreras = opcion_ver(dao, nombre)
+        try:
+            carreras = opcion_ver(dao, nombre)
+        except Exception as e:
+            print(f"Error al leer: {e}")
+            continue
 
         if len(carreras) > 0:
             for carrera in carreras:
@@ -56,7 +76,20 @@ while continuar:
             print("Sin resultados")
 
     elif opcion == "4":
-        pass
+        
+        nombre = input("Nombre de la carrera a borrar: ").strip()
+        if nombre == "":
+            print("El nombre no puede estar vacío.")
+            continue
+        confirmar = input(f"¿Seguro que quieres borrar '{nombre}'? (s/N): ").strip().lower()
+        if confirmar == "s":
+            try:
+                opcion_borrar(dao, nombre)
+                print("Carrera borrada (si existía).")
+            except Exception as e:
+                print(f"Error al borrar: {e}")
+        else:
+            print("Operación cancelada.")
     
     elif opcion == '0':
         continuar = False
