@@ -2,11 +2,11 @@ import mysql.connector
 from carrera import Carrera
 
 class CarreraDAO:
-    def __init__(self):
+    def __init__(self, user = "root", password = "root"):
         self.SetConn(mysql.connector.connect(
             host="localhost",
-            user="root",
-            password="root",
+            user=user,
+            password=password,
             database="universidad") )
         self.SetCursor(self.__conn.cursor()) 
 
@@ -28,26 +28,35 @@ class CarreraDAO:
         self.GetCursor().execute(sql, (c.nombre, c.duracion, c.id_))
         self.GetConn().commit()
         self.GetCursor().close()
-    
+
+    def update(self, c, nombre_original):
+        sql = "UPDATE carreras SET nombre = %s, duracion = %s WHERE nombre = %s"
+        valores = (c.GetNombre(), c.GetDuracion(), nombre_original)
+        self.GetCursor().execute(sql, valores,)
+        self.GetConn().commit()
+        
     def read(self, nombre = ""):
         query = ""
 
         if nombre == "":
-            query = "SELECT * FROM carrera"
+            query = "SELECT * FROM carreras"
             self.GetCursor().execute(query)
 
         else:
-            query = "SELECT * FROM carrera WHERE nombre LIKE %s"
-            values = [nombre]
-            self.GetCursor().execute(query, values)
+            fnombre = f"%{nombre}%"
+            query = "SELECT * FROM carreras WHERE nombre LIKE %s"
+            self.GetCursor().execute(query, (fnombre,))
             
-        return self.GetCursor().fetchall()
-    
-    def update(self, c):
-        sql = "UPDATE carrera SET nombre = %s, duracion = %s WHERE id = %s"
-        valores = (c.GetNombre(), c.GetDuracion(), c.GetId())
-        self.GetCursor().execute(sql, valores,)
-        self.GetConn.commit()
+        registros = self.GetCursor().fetchall()
+        carreras = []
+        for registro in registros:
+            id_carrera = registro[0]
+            nombre_carrera = registro[1]
+            duracion_carrera = round(float(registro[2]), 1)
+
+            carrera = Carrera(nombre_carrera, duracion_carrera, id_carrera)
+            carreras.append(carrera)
+        return carreras
         
     def delete(self, nombre):
         sql = "DELETE FROM carreras WHERE nombre = %s"

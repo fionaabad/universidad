@@ -23,5 +23,5 @@ class Carrera:
         self.__id = id
         
     def __str__(self):
-        return f'La carrera {self.GetId()} - {self.GetNombre()} dura {self.GetDuracion} años.'
+        return f'La carrera {self.GetId()} - {self.GetNombre()} dura {self.GetDuracion()} años.'
         

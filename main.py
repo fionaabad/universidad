@@ -14,43 +14,123 @@ def mostrar_menu():
 def opcion_crear(dao, nombre, duracion):
     return dao.create(nombre, duracion)
 
-def opcion_ver(dao, nombre = ""):
-    return dao.read(nombre)
-
 def opcion_actualizar(dao, id_, nombre, duracion):
     return dao.update(nombre, duracion, id_)
+
+def opcion_ver(dao, nombre = ""):
+    return dao.read(nombre)
        
 def opcion_borrar(dao, nombre):
     return dao.delete(nombre)
-    
-dao = CarreraDAO()   
 
-while True:
+user = input("(Predeterminado: root) Escribe el usuario: ")
+if user == "":
+    user = "root"
+
+password = input("(Predeterminado: root) Escribe la contraseña: ")
+if password == "":
+    password = "root"
+
+dao = CarreraDAO(user, password)
+
+continuar = True
+
+while continuar:
     print(mostrar_menu())
     opcion = input("Elige opción: ").strip()
     
     if opcion == "1":
-        nombre = input("Introduce el nombre de la carrera")
-        duracion = float(input("Introduce la duracion de la carrera en años"))
+        nombre = input("Nombre de la carrera: ").strip()
+        if nombre == "":
+            print("El nombre no puede estar vacío.")
+            continue
+        dur = input("Duración (años, puede ser decimal): ").strip()
+        try:
+            duracion = float(dur)
+        except ValueError:
+            print("Duración no válida. Debe ser un número.")
+            continue
 
-        c = Carrera(nombre, duracion)
-        dao.create(c)
+        try:
+            opcion_crear(dao, nombre, duracion)
+            print("Carrera añadida correctamente.")
+        except Exception as e:
+            print(f"Error al añadir: {e}")
     
     elif opcion == "2":
-        pass
+        nombre = input("Nombre de la carrera a actualizar: ").strip()
+        if nombre == "":
+            print("El nombre no puede estar vacio.")
+            continue
+
+        carreras = dao.read(nombre)
+        if len(carreras) == 0:
+            print(f"No se encontró ninguna carrera con el nombre '{nombre}'.")
+            continue
+        elif len(carreras) > 1:
+            print("Hay varias carreras con ese nombre. Especifique un nombre único.")
+            for c in carreras:
+                print(c)
+            continue
+
+        carrera_actual = carreras[0]
+        print(f"Carrera encontrada: {carrera_actual}")
+
+        nuevo_nombre = input("Nuevo nombre (dejar vacío para mantener el actual): ").strip()
+        if nuevo_nombre == "":
+            nuevo_nombre = carrera_actual.GetNombre()
+
+        dur = input("Nueva duración (dejar vacío para mantener la actual): ").strip()
+        if dur == "":
+            nueva_duracion = carrera_actual.GetDuracion()
+        else:
+            try:
+                nueva_duracion = float(dur)
+            except ValueError:
+                print("Duración no válida. Debe ser un número.")
+                continue
+
+        # Crear la carrera actualizada (mantiene el id)
+        carrera_modificada = Carrera(nuevo_nombre, nueva_duracion, carrera_actual.GetId())
+
+        try:
+            dao.update(carrera_modificada, carrera_actual.GetNombre())
+            print("Carrera actualizada correctamente.")
+        except Exception as e:
+            print(f"Error al actualizar: {e}")
+
     
     elif opcion == "3":
-        pass
-    
-    elif opcion == "4":
-        pass
+        nombre = input("(opcional) Nombre a buscar: ")
+        try:
+            carreras = opcion_ver(dao, nombre)
+        except Exception as e:
+            print(f"Error al leer: {e}")
+            continue
+
+        if len(carreras) > 0:
+            for carrera in carreras:
+                print(carrera)
+        else:
+            print("Sin resultados")
+
+    elif opcion == "4": 
+        nombre = input("Nombre de la carrera a borrar: ").strip()
+        if nombre == "":
+            print("El nombre no puede estar vacío.")
+            continue
+        confirmar = input(f"¿Seguro que quieres borrar '{nombre}'? (s/N): ").strip().lower()
+        if confirmar == "s":
+            try:
+                opcion_borrar(dao, nombre)
+                print("Carrera borrada (si existía).")
+            except Exception as e:
+                print(f"Error al borrar: {e}")
+        else:
+            print("Operación cancelada.")
     
     elif opcion == '0':
-        pass
+        continuar = False
     
     else:
         print("Opción no válida")
-
-
-    
-    
