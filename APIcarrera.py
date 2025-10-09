@@ -11,7 +11,7 @@ password = input("(Predeterminado: root) Escribe la contraseña: ")
 if password == "":
     password = "root"
 
-dao = Conexion(user, password)
+conn = Conexion(user, password)
       
 class APIcarrera:
 
@@ -26,8 +26,8 @@ class APIcarrera:
         duracion = duracion['duracion']
         
         crear_carrera = Carrera(nombre, duracion)
-        dao.create(crear_carrera)
-        dao.GetConn().close()
+        conn.create(crear_carrera)
+        conn.GetConn().close()
         
         return jsonify({'Carrera creada correctamente.'})
     
