@@ -11,8 +11,8 @@ def mostrar_menu():
     )
     return menu
 
-def opcion_crear(dao, nombre, duracion):
-    return dao.create(nombre, duracion)
+def opcion_crear(dao, carrera):
+    return dao.create(carrera)
 
 def opcion_actualizar(dao, id_, nombre, duracion):
     return dao.update(nombre, duracion, id_)
@@ -52,7 +52,8 @@ while continuar:
             continue
 
         try:
-            opcion_crear(dao, nombre, duracion)
+            crear_carrera = Carrera(nombre, duracion)
+            opcion_crear(dao, crear_carrera)
             print("Carrera añadida correctamente.")
         except Exception as e:
             print(f"Error al añadir: {e}")
