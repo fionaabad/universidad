@@ -25,7 +25,6 @@ class APIcarrera:
         duracion = data['duracion']
         crear_carrera = Carrera(nombre, duracion)
         CarreraDAO.create(crear_carrera, conn)
-        conn.GetConn().close()
         return jsonify({'mensaje': 'Carrera creada correctamente.'})
     
     @app.route("/update/", methods = ["PUT"])
@@ -42,6 +41,5 @@ class APIcarrera:
         nombre = data['nombre']
         borrar_carrera = Carrera(nombre)
         CarreraDAO.delete(borrar_carrera, conn)
-        conn.GetConn().close()
         
         return jsonify({'mensaje': 'Carrera eliminada correctamente.'})
