@@ -27,7 +27,9 @@ class APIcarrera:
         
         crear_carrera = Carrera(nombre, duracion)
         dao.create(crear_carrera)
-        return "placeholder"
+        dao.GetConn().close()
+        
+        return jsonify({'Carrera creada correctamente.'})
     
     @app.route("/update/", methods = "PUT")
     def update():
