@@ -6,29 +6,29 @@ class CarreraDAO:
 
     def create(c, conn):
         sql = "INSERT INTO carreras (nombre, duracion) VALUES (%s, %s)"
-        self.GetCursor().execute(sql, (c.GetNombre(), c.GetDuracion()))
-        self.GetConn().commit()
+        conn.GetCursor().execute(sql, (c.GetNombre(), c.GetDuracion()))
+        conn.GetConn().commit()
 
 
     def update(c, conn):
         sql = "UPDATE carreras SET nombre = %s, duracion = %s WHERE nombre = %s"
         valores = (c.GetNombre(), c.GetDuracion(), nombre_original)
-        self.GetCursor().execute(sql, valores,)
-        self.GetConn().commit()
+        conn.GetCursor().execute(sql, valores,)
+        conn.GetConn().commit()
         
     def read(conn, nombre = ""):
         query = ""
 
         if nombre == "":
             query = "SELECT * FROM carreras"
-            self.GetCursor().execute(query)
+            conn.GetCursor().execute(query)
 
         else:
             fnombre = f"%{nombre}%"
             query = "SELECT * FROM carreras WHERE nombre LIKE %s"
-            self.GetCursor().execute(query, (fnombre,))
+            conn.GetCursor().execute(query, (fnombre,))
             
-        registros = self.GetCursor().fetchall()
+        registros = conn.GetCursor().fetchall()
         carreras = []
         for registro in registros:
             id_carrera = registro[0]
@@ -41,5 +41,5 @@ class CarreraDAO:
         
     def delete(nombre, conn):
         sql = "DELETE FROM carreras WHERE nombre = %s"
-        self.GetCursor().execute(sql, (nombre,))
-        self.GetConn().commit()
+        conn.GetCursor().execute(sql, (nombre,))
+        conn.GetConn().commit()
