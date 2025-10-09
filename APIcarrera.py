@@ -41,4 +41,10 @@ class APIcarrera:
     
     @app.route("/delete/", methods = "DELETE")
     def delete():
-        return "placeholder"
+        data = req.get_json()
+        nombre = data['nombre']
+        borrar_carrera = Carrera(nombre)
+        conn.delete(borrar_carrera)
+        conn.GetConn().close()
+        
+        return jsonify({'Carrera eliminada correctamente.'})
