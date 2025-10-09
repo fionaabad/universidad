@@ -1,24 +1,32 @@
 from carrera import Carrera
+from ConexionBD import Conexion
 from DAOcarrera import CarreraDAO
 from flask import Flask, jsonify, request as req
 
+user = input("(Predeterminado: root) Escribe el usuario: ")
+if user == "":
+    user = "root"
+    
+password = input("(Predeterminado: root) Escribe la contraseña: ")
+if password == "":
+    password = "root"
+
+dao = Conexion(user, password)
+      
 class APIcarrera:
 
     app = Flask(__name__)
     
-    user = input("(Predeterminado: root) Escribe el usuario: ")
-    if user == "":
-        user = "root"
-    
-    password = input("(Predeterminado: root) Escribe la contraseña: ")
-    if password == "":
-        password = "root"
-        
-    dao = CarreraDAO(user, password)
     
     @app.route("/create/", methods = "POST")
     def create():
-        data = 
+        data = req.get_json()
+        
+        nombre = data['nombre']
+        duracion = duracion['duracion']
+        
+        crear_carrera = Carrera(nombre, duracion)
+        dao.create(crear_carrera)
         return "placeholder"
     
     @app.route("/update/", methods = "PUT")
