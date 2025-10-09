@@ -12,13 +12,12 @@ if password == "":
     password = "root"
 
 conn = Conexion(user, password)
+
+app = Flask(__name__)
       
 class APIcarrera:
-
-    app = Flask(__name__)
     
-    
-    @app.route("/create/", methods = "POST")
+    @app.route("/create/", methods = ["POST"])
     def create():
         data = req.get_json()
         
@@ -31,15 +30,15 @@ class APIcarrera:
         
         return jsonify({'Carrera creada correctamente.'})
     
-    @app.route("/update/", methods = "PUT")
+    @app.route("/update/", methods = ["PUT"])
     def update():
         return "placeholder"
     
-    @app.route("/read/", methods = "GET")
+    @app.route("/read/", methods = ["GET"])
     def read():
         return "placeholder"
     
-    @app.route("/delete/", methods = "DELETE")
+    @app.route("/delete/", methods = ["DELETE"])
     def delete():
         data = req.get_json()
         nombre = data['nombre']
