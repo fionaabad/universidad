@@ -3,19 +3,20 @@ from carrera import Carrera
 
 class CarreraDAO:
 
-    def create(self, c):
+
+    def create(c, conn):
         sql = "INSERT INTO carreras (nombre, duracion) VALUES (%s, %s)"
         self.GetCursor().execute(sql, (c.GetNombre(), c.GetDuracion()))
         self.GetConn().commit()
 
 
-    def update(self, c, nombre_original):
+    def update(c, conn):
         sql = "UPDATE carreras SET nombre = %s, duracion = %s WHERE nombre = %s"
         valores = (c.GetNombre(), c.GetDuracion(), nombre_original)
         self.GetCursor().execute(sql, valores,)
         self.GetConn().commit()
         
-    def read(self, nombre = ""):
+    def read(conn, nombre = ""):
         query = ""
 
         if nombre == "":
@@ -38,7 +39,7 @@ class CarreraDAO:
             carreras.append(carrera)
         return carreras
         
-    def delete(self, nombre):
+    def delete(nombre, conn):
         sql = "DELETE FROM carreras WHERE nombre = %s"
         self.GetCursor().execute(sql, (nombre,))
         self.GetConn().commit()

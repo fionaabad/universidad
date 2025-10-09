@@ -23,13 +23,11 @@ class APIcarrera:
         data = req.get_json()
         
         nombre = data['nombre']
-        duracion = duracion['duracion']
-        
+        duracion = data['duracion']
         crear_carrera = Carrera(nombre, duracion)
-        conn.create(crear_carrera)
+        CarreraDAO.create(crear_carrera, conn)
         conn.GetConn().close()
-        
-        return jsonify({'Carrera creada correctamente.'})
+        return jsonify({'mensaje': 'Carrera creada correctamente.'})
     
     @app.route("/update/", methods = "PUT")
     def update():
@@ -44,7 +42,7 @@ class APIcarrera:
         data = req.get_json()
         nombre = data['nombre']
         borrar_carrera = Carrera(nombre)
-        conn.delete(borrar_carrera)
+        CarreraDAO.delete(borrar_carrera, conn)
         conn.GetConn().close()
         
-        return jsonify({'Carrera eliminada correctamente.'})
+        return jsonify({'mensaje': 'Carrera eliminada correctamente.'})
