@@ -2,27 +2,6 @@ import mysql.connector
 from carrera import Carrera
 
 class CarreraDAO:
-    def __init__(self, user = "root", password = "root"):
-        self.SetConn(mysql.connector.connect(
-            host="localhost",
-            user=user,
-            password=password,
-            database="universidad") )
-        self.SetCursor(self.__conn.cursor()) 
-
-    def GetConn(self):
-        return self.__conn
-    
-    def SetConn(self, conn):
-        self.__conn = conn
-        
-    def GetCursor(self):
-        return self.__cursor
-    
-    def SetCursor(self, cursor):
-        cursor
-        self.__cursor = cursor 
-
 
     def create(self, c):
         sql = "INSERT INTO carreras (nombre, duracion) VALUES (%s, %s)"
